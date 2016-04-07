@@ -14,7 +14,7 @@
   %=========
   % 中文信息
   %=========
-  ctitle={竞价型云平台系统可用性及性能提升技术研究},
+  ctitle={竞价云实例应用性能与可用性\\提升技术研究},
   cdegree={工学博士},
   cdepartment={计算机科学与技术系},
   cmajor={计算机科学与技术},
@@ -26,17 +26,17 @@
   % cdate={超新星纪元},
   %
   % 博士后专有部分
-  cfirstdiscipline={计算机科学与技术},
-  cseconddiscipline={系统结构},
-  postdoctordate={2009年7月——2011年7月},
-  id={编号}, % 可以留空： id={},
-  udc={UDC}, % 可以留空
-  catalognumber={分类号}, % 可以留空
+  %cfirstdiscipline={计算机科学与技术},
+  %cseconddiscipline={系统结构},
+  %postdoctordate={2009年7月——2011年7月},
+  %id={编号}, % 可以留空： id={},
+  %udc={UDC}, % 可以留空
+  %catalognumber={分类号}, % 可以留空
   %
   %=========
   % 英文信息
   %=========
-  etitle={Improving System Availability and Performance on Spot Clouds},
+  etitle={Improving Availability and Performance of Applications on Spot Clouds},
   % 这块比较复杂，需要分情况讨论：
   % 1. 学术型硕士
   %    edegree：必须为Master of Arts或Master of Science（注意大小写）
@@ -67,35 +67,32 @@
 
 % 定义中英文摘要和关键字
 \begin{cabstract}
-  为了进一步提升计算资源利用率，Amazon EC2 云计算平台推出了竞价型虚拟机实例。竞
-  价型实例不再是按需付费，其价格随市场供需关系变化，当用户设定的竞价低于市场价格
-  时云平台将回收该实例。竞价型云平台的出现为云租户提供了利用低成本计算资源的机会，
-  同时也引入了竞价型实例不可靠的特点。
+  为了提升计算资源利用率，Amazon EC2 云计算平台推出了竞价型虚拟机实例。与按需
+  付费方式不同，其价格随市场供需关系变化。当云租户设定的竞价低于市场价格时，Amazon 
+  EC2 将回收该实例。竞价型实例的出现为云租户提供了利用低成本计算资源的机会，同
+  时也引入了易失效的不可靠特点。
 
-  如何利用竞价型实例同时消除其带来的不可靠因素，这涉及到系统设计、容错机制和策略、
-  竞价和可用区选择策略等多方面的协同。同时，不同的系统类型，如：批处理任务、大规
-  模并行作业、Web 服务等，也有着不同的执行特点和对可用性的要求。
-
-  从如何利用竞价型实例加速大规模计算密集型并行任务，到在竞价型云平台中提供分布式
-  服务和在线服务，本文研究了如何提升竞价型云平台中的系统可用性及性能。主要创新点
-  和研究成果包括：
+  如何在保留竞价型实例廉价特征的同时，消除其带来的不可靠因素？这涉及到对竞价
+  型实例上应用的架构设计、容错机制、竞价策略等多方面的协同。不同的应用类型有
+  着不同的执行特点和对可用性及性能的要求。从利用竞价型实例加速大规模计算密集型并行
+  任务，到在竞价型云平台中提供分布式服务和在线服务，本文从云租户的角度研究了如
+  何提升竞价云实例应用的性能与可用性。主要创新点和研究成果包括：
   \begin{itemize}
-    \item \emph{大规模计算密集型并行任务调度器。} 针对大规模计算密集型并行任务
-    中存在的异常节点拖慢整体作业进度问题，提出了基于程序插桩跟踪和聚类分析的异常
-    节点检测方法，设计了结合任务克隆、投机执行、细粒度任务分割等策略的执行加速机
-    制。实验评测表明，该技术利用约占虚拟集群3\%计算成本的竞价型实例取得了平均30\%
-    的作业完成时间缩减。
-    \item \emph{竞价云平台中分布式服务的可用性与成本模型。} 指出了竞价型实例给
-    基于SMR（状态机复制）的分布式服务的可用性分析带来的变化，通过竞价型实例的失效
-    概率模型将竞价决策同分布式服务的可用性联系起来，将分布式服务的可用性与成本最
-    优化抽象为一个非线性规划问题。并据此设计了可用性与成本兼顾的竞价框架，在保持
-    可用性同按需型实例相同的情况下实现了超过80\%的成本节约。
-    \item \emph{在线服务在竞价型云平台上的轻量级暖备方案。} 针对已有解决方案在
-    可用性和性能上的限制，使用双机暖备、互备故障转移机制将不可控的虚拟机实例启动
-    时间移出了服务迁移的关键路径，利用轻量级的进程迁移和时间可控的磁盘镜像技术提
-    升了服务性能，综合考虑稳定性和成本的可用区选择方法减少了服务迁移次数。实验评
-    测显示，相比已有方案在可用性有近一个数量级的提升，在TPC-W和YCSB基准测试集上
-    的性能提升分别为45\%和100\%。
+    \item \emph{大规模计算密集型并行任务利用竞价型实例的作业加速方法。} 针对大规
+    模计算密集型并行任务中存在的异常节点拖慢整体作业进度问题，提出了基于程序插桩跟
+    踪和聚类分析的异常节点检测方法，设计了结合任务克隆、投机执行、细粒度任务分割策
+    略的执行加速机制。实验评测表明，该技术利用约占虚拟集群3\%计算成本的竞价型实例取得
+    了平均30\%的作业完成时间缩减。
+    \item \emph{竞价型实例上分布式服务的可用性与成本模型。} 指出了竞价型实例给基
+    于状态机复制（SMR）的分布式服务的可用性分析带来的变化，通过竞价型实例的失效概率
+    模型将竞价决策同分布式服务的可用性联系起来，并将分布式服务的可用性与成本的最优化
+    抽象为一个非线性规划问题。据此设计了可用性与成本兼顾的使用竞价型实例提供分布式服
+    务的竞价框架，在保持可用性同相应按需型实例相当的情况下实现了超过80\%的成本节约。
+    \item \emph{竞价型云平台中在线服务的轻量级暖备机制。} 针对已有解决方案在
+    可用性和性能上的限制，使用双机暖备、互备故障转移机制将不可控的虚拟机实例启动时
+    间移出服务迁移的关键路径，利用轻量级的进程迁移和时间可控的磁盘镜像技术提升了服
+    务性能。评测显示，相比已有方法在可用性上有近一个数量级的提升，在TPC-W和YCSB基
+    准测试集上的性能提升分别达到45\%和100\%。
   \end{itemize}
 
 \end{cabstract}
@@ -104,23 +101,41 @@
 % \ckeywords{\TeX, \LaTeX, CJK, 模板, 论文}
 
 \begin{eabstract}
-   An abstract of a dissertation is a summary and extraction of research work
-   and contributions. Included in an abstract should be description of research
-   topic and research objective, brief introduction to methodology and research
-   process, and summarization of conclusion and contributions of the
-   research. An abstract should be characterized by independence and clarity and
-   carry identical information with the dissertation. It should be such that the
-   general idea and major contributions of the dissertation are conveyed without
-   reading the dissertation.
+   
+   For increasing the computing resource utilization, Amazon EC2 proposed the 
+   spot instances. Unlike their on-demand counterparts, the price of spot instances 
+   varies in real-time based on supply and demand. The spot instances will be revoked 
+   when its price exceeds the tenant's bid. Spot instances bring an opportunity 
+   of greater cost efficiency for tenants, but the unreliability at the same time.
 
-   An abstract should be concise and to the point. It is a misunderstanding to
-   make an abstract an outline of the dissertation and words ``the first
-   chapter'', ``the second chapter'' and the like should be avoided in the
-   abstract.
+   Utilizing spot instances and masking its out-of-bid failures involve 
+   system designs, fault tolerance mechanisms, and bidding strategies. Different 
+   applications have different execution characteristic, and availability and 
+   performance requirement. From speeding up massive compute-intensive parallel tasks 
+   with spot instances to providing distributed services and online services on spot 
+   clouds, this dissertation presents a thorough study of improving availability and 
+   performance of applications on spot clouds from a could tenant's perspective. Main 
+   contributions of this dissertation are summarized in following: 
 
-   Key words are terms used in a dissertation for indexing, reflecting core
-   information of the dissertation. An abstract may contain a maximum of 5 key
-   words, with semi-colons used in between to separate one another.
+  \begin{itemize}
+    \item Addressing on the outlier problem of massive compute-intensive parallel tasks, 
+    we propose a binary instrumentation tracing and clustering analysis based outlier 
+    detection scheme, and using spot instances speeding up the job with task cloning, 
+    speculative execution, and task split. Experimental results show about 30\% job 
+    complementation time reduction in average with only 3\% extra budget.
+    \item We point out that the availability analysis of SMR based distributed services 
+    with spot instances is different, and formalize the optimization of availability and 
+    cost of distributed services with a non-linear programming model. Accordingly, we 
+    design a cost and availability aware bidding framework, reducing more than 80\% cost 
+    while keeping the same availability level compared with using on-demand instances.
+    \item We present a warm standby based mechanism for hosting online services using 
+    spot instances without availability and performance limitations. It eliminates forced 
+    unavailability by removing the uncontrolled instance allocation from service migration, 
+    and thus improves the service availability near an order of magnitude. Light-weight 
+    migration and staleness bounded async disk mirroring gain 45\% and 100\% performance 
+    improvement in TPC-W and YCSB benchmarks respectively.
+  \end{itemize}
+
 \end{eabstract}
 
 % \ekeywords{\TeX, \LaTeX, CJK, template, thesis}

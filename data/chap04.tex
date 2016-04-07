@@ -1,4 +1,4 @@
-\chapter{竞价型云平台中分布式服务的可用性与成本模型}
+\chapter{竞价型实例上分布式服务的可用性与成本模型}
 \label{cha:jupiter}
 
 \section{本章概述}
@@ -99,7 +99,7 @@ FP(t) = 1 - (1 - FP^{\prime}) \cdot (1 - Pr(p(t)>b))
 
 \begin{figure}
   \centering
-  \includegraphics{SpotPrice}
+  \includegraphics[width=0.9\textwidth]{SpotPrice}
   \caption{一个``us-east-1a''可用区的``linux.m1.small''类型的竞价实例的市场价格历史数据}
   \label{figure:sil}
 \end{figure}
@@ -154,7 +154,7 @@ A_{\mathcal{A}_{o}(S_o, {\bf{FP^{\prime}}})} - A_{\mathcal{A}_{o}(S_s, FP(\bf b)
 幸好，从用户角度来看，意图是减少竞价实例的使用成本而不必获得最优解。既然在可接受的短时间内求得最优解是不可能的，不妨退而求其次获取一个接近最优解的竞价决策。下面主要介绍能够实际应用的成本和可用性感知的使用竞价实例构建分布式服务的竞价框架。如图 \ref{figure:framework} 所示，竞价决策在每个竞价周期的开始由在线竞价模块给出。然后竞价实例申请被发送给竞价云平台。竞价实例节点失效预测模块用于估计在下一个竞价周期中一个竞价实例在指定竞价下的失效概率。估计的竞价实例失效概率用于验证整个分布式系统的可用性需求约束。随着不断采集竞价实例市场价格数据，竞价实例的失效概率的预测可以得以改善。
 \begin{figure}
   \centering
-  \includegraphics[width=1.0\textwidth]{CAB_arch}
+  \includegraphics[width=0.85\textwidth]{CAB_arch.pdf}
   \caption{竞价框架}
   \label{figure:framework}
 \end{figure}
@@ -172,47 +172,43 @@ w_i = log_2(\frac{1-p_i}{p_i})
 
 由于每个竞价实例被固定分配了相同的投票权，根据最优投票权分配方式各个竞价实例应有相同的失效概率。在本文的在线竞价算法中，各个竞价实例的失效概率会趋近于相同。该算法使用了枚举和贪心的策略。
 
-\begin{figure}
-\rule[-.2pt]{\textwidth}{0.9pt}
-\textbf{Algorithm: Bidding}
-
-\rule[-.2pt]{\textwidth}{0.5pt}
-
-\begin{algorithmic}[1]
-\Require{$availability$, $type$}
-\Ensure{$bids$}
-
-\State $zones\gets get\_availability\_zones()$
-\State $n\gets 1$
+\begin{algorithm}
+\caption{在线竞价}
+\label{algo:bidding}
+\KwIn{$availability$ and instance $type$}
+\KwOut{$bids$}
+$zones\gets get\_availability\_zones()$\;
+$n\gets 1$\;
 \While{$n \not> zones.length$}
-    \State $FP\gets node\_failure\_pr(n, availability)$
-    \ForAll{$zone \in zones$}
-        \State $spotprice\gets get\_spot\_price(zone, type)$
-        \State $bid\gets spotprice.price$
-        \While{$bid \not> get\_on\_demand\_price(zone, type) $}
-            \If{$estimate\_FP(zone, bid, spotprice) \not >FP$}
-                \State $\textbf{break}$
-            \Else{}
-                \State $bid\gets bid + 1$
-            \EndIf
-        \EndWhile
-        \State $bids[n][zone]\gets bid$
-    \EndFor
-    \State $sort(bids[n])$
-    \State $cost\_upper\_bound[n]\gets sum(bids[n][1:n])$
-    \State $n\gets n + 1$
-\EndWhile
-\State $m\gets min\_key(cost\_upper\_bound)$
-\State \Return{bids[m][1:m]}
-\end{algorithmic}
-\rule[-.2pt]{\textwidth}{0.8pt}
-\caption{在线竞价算法}\label{figure:bidding-algo}
-\end{figure}
+{
+  $FP\gets node\_failure\_pr(n, availability)$\;
+  \ForEach{$zone \in zones$}
+  {
+    $spotprice\gets get\_spot\_price(zone, type)$\;
+    $bid\gets spotprice.price$\;
+    \While{$bid \not> get\_on\_demand\_price(zone, type) $}
+    {
+      \eIf{$estimate\_FP(zone, bid, spotprice) \not >FP$}
+      {
+        \textbf{break}\;
+      }{
+        $bid\gets bid + 1$\;
+      }
+    }
+    $bids[n][zone]\gets bid$\;
+  }
+  $sort(bids[n])$\;
+  $cost\_upper\_bound[n]\gets sum(bids[n][1:n])$\;
+  $n\gets n + 1$;\
+}
+$m\gets min\_key(cost\_upper\_bound)$\;
+\Return{$bids[m][1:m]$}
+\end{algorithm}
 
-在线竞价算法伪代码如图 \ref{figure:bidding-algo} 所示。该算法接受一个分布式系统配置信息作为输入，包括系统可用性和节点类型需求等。整个在线竞价步骤简单：1）对于所有可能的节点数 $n$，计算在各个节点失效概率相同情况下的满足系统可用性要求的节点失效概率最大可能值 $FP$。2）在 $n$ 个节点的配置下，对于所有可用区计算估计失效概率小于 $FP$ 的最小竞价。预测的失效概率依赖于各个可用区的竞价实例失效模型、竞价、竞价实例市场价格、市场价格逗留时间。3）比较所有可用区的竞价值，以贪心的方式选择可用区。4）累加所选择的可用区竞价，计算在每一个节点数配置下计算成本的上限并返回成本上限最小的竞价方案作为竞价决策。这个算法不能保证总是给出一个最优的竞价决策，但在实际使用中能给出一个接近最优的竞价方案。
+在线竞价策略如算法 \ref{algo:bidding} 所示。该算法接受一个分布式系统配置信息作为输入，包括系统可用性和节点类型需求等。整个在线竞价步骤简单：1）对于所有可能的节点数 $n$，计算在各个节点失效概率相同情况下的满足系统可用性要求的节点失效概率最大可能值 $FP$。2）在 $n$ 个节点的配置下，对于所有可用区计算估计失效概率小于 $FP$ 的最小竞价。预测的失效概率依赖于各个可用区的竞价实例失效模型、竞价、竞价实例市场价格、市场价格逗留时间。3）比较所有可用区的竞价值，以贪心的方式选择可用区。4）累加所选择的可用区竞价，计算在每一个节点数配置下计算成本的上限并返回成本上限最小的竞价方案作为竞价决策。这个算法不能保证总是给出一个最优的竞价决策，但在实际使用中能给出一个接近最优的竞价方案。
 
 \subsection{失效概率预测}
-在竞价框架中，在线竞价模块需由竞价实例失效模型完成各个竞价实例节点失效概率的预测。为估计竞价实例的失效概率，竞价实例的市场价格预测模型被嵌入到竞价实例失效模型中。如前文中 \ref{subsec-sifm} 节所述，竞价实例的市场价格的变化被形式化为一个半马尔科夫链模型。因此，竞价实例失效概率预测的一个关键任务是从观测中的竞价实例市场价格历史数据中重新构造出概率转移分布。
+在竞价框架中，在线竞价模块需由竞价实例失效模型完成各个竞价实例节点失效概率的预测。为估计竞价实例的失效概率，竞价实例的市场价格预测模型被嵌入到竞价实例失效模型中。如前文中 \ref{jupiter-sifm} 节所述，竞价实例的市场价格的变化被形式化为一个半马尔科夫链模型。因此，竞价实例失效概率预测的一个关键任务是从观测中的竞价实例市场价格历史数据中重新构造出概率转移分布。
 研究者Wee\cite{5948651}在2011年认为竞价实例市场价格采样累计分布函数约每一个小时有明显的增长。然而，收集到的2014年竞价实例市场价格数据显示市场价格的变化频率已经加快为每小时多次。简单起见，这里将半马尔可夫链的时间单位设置为1分钟，采样数据中的逗留时间 $d_i$ 被离散化为
 \begin{equation}
 \tau_i \triangleq \tau(S_i \rightarrow S_{i+1}) \triangleq \lfloor d_i \rfloor
@@ -276,7 +272,7 @@ FP(b) =
 对于竞价实例失效模型，需要重点关注的是其对竞价实例失效概率的预测精度。据此，在微基准测试中需要比较测得的竞价实例失效概率和模型预估的竞价实例失效概率期望。测试中采用了一种间接的比较方式：先使用竞价实例失效模型模型确定各个可用区竞价不足失效概率在一个月时间内不超过0.01的竞价，然后通过比较竞价和该月的竞价实例市场价格数据计算实际的竞价不足失效概率。通过比较实际的竞价不足失效概率和0.01可以得出模型预测的大致可靠程度。图\ref{figure:fp}显示了在5个可用区的竞价不足失效概率。
 \begin{figure}
   \centering
-  \includegraphics[width=1.0\textwidth]{fp}
+  \includegraphics[width=0.9\textwidth]{fp.pdf}
   \caption{预估竞价不足失效概率为0.01竞价下的实际失效概率}
   \label{figure:fp}
 \end{figure}
@@ -287,7 +283,7 @@ FP(b) =
 在2014年12月，竞价框架在Amazon EC2云平台上进行了长达一周的运行测试。使用Jupiter框架运行正确，在一周时间内保证了两个分布式服务一直可用。使用$Extra(0, 0.1)$启发式策略的框架作为对照组也同时运行。两个竞价策略中的竞价周期均设为1小时。
 \begin{figure}
   \centering
-  \includegraphics[width=1.0\textwidth]{rr}
+  \includegraphics[width=0.85\textwidth]{rr.pdf}
   \caption{不同竞价策略下的竞价计算实例成本（2014年12月15－22日）}
   \label{figure:rr}
 \end{figure}
@@ -301,17 +297,17 @@ FP(b) =
 11周时间使用5个 ``linux.m1.small'' 按需实例的分布式锁服务的计算成本以最便宜的可用区计算是406.56美元。对于基于纠删码的分布式存储服务，11周时间运行5个 ``linux.m3.large'' 按需实例以最便宜的可用区计算其成本是1293.6美元。这两个值作为成本的评测基线。两个分布式服务在不同竞价策略下的成本如图 \ref{figure:dlscost} 和 \ref{figure:dsscost}所示。图 \ref{figure:dlsavailability} 和 \ref{figure:dssavailability} 给出了不同竞价策略在可用性方面的评测结果。
 
 如图 \ref{figure:dlscost} 所示，本章提出的竞价策略在分布式锁服务的案例中只需约基线五分之一的成本。将竞价周期设为6小时获得了评测中最好的结果，计算成本约77.3美元。对于1小时，9小时以及12小时的竞价周期，本章提出的竞价策略所需成本略高于对照的启发式策略 $Extra(0, 0.2)$ 。启发式策略 $Extra(2, 0.2)$ 的成本则要明显高于其他两个竞价策略。
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{cost-dls.pdf}
+  \caption{不同竞价策略下分布式锁服务的竞价实例租用成本（2014年10－12月）}
+  \label{figure:dlscost}
+\end{figure}
 
 对于分布式锁服务的案例如图\ref{figure:dlsavailability}所示，Jupiter竞价框架除了竞价周期为12小时的配置没有发生服务失效不可用的情况（可用性接近1）。而另外两个启发式策略则无法保证相同的可用性级别。在使用对照组启发式策略 $Extra(0, 0.2)$ 时，11周中累计有8小时的时间服务处于故障停机状态。这远远达不到高可用服务的要求。在另外一个对照组启发式策略 $Extra(2, 0.2)$ 下，分布式锁服务的可用性要好于 $Extra(0, 0.2)$ 策略。但在不同竞价周期中仍然无法满足服务可用性级别的约束。
 \begin{figure}
   \centering
-  \includegraphics[width=1.0\textwidth]{cost-dls}
-  \caption{不同竞价策略下分布式锁服务的竞价实例租用成本（2014年10－12月）}
-  \label{figure:dlscost}
-\end{figure}
-\begin{figure}
-  \centering
-  \includegraphics[width=1.0\textwidth]{ava-dls}
+  \includegraphics[width=0.9\textwidth]{ava-dls.pdf}
   \caption{不同竞价策略下分布式锁服务的可用性（2014年10－12月）}
   \label{figure:dlsavailability}
 \end{figure}
@@ -319,21 +315,20 @@ FP(b) =
 对于策略 $Extra(0, 0.2)$，每个竞价周期申请的竞价实例数都是5个。而策略 $Extra(2, 0.2)$ 每次申请的竞价实例数都是7个。策略 $Extra(2, 0.2)$ 在服务可用性方面显然在所有情况下都要好于策略 $Extra(0, 0.2)$。评测结果表明：在没有对竞价实例失效概率预估的情况下很难有效保证服务可用性级别，即使增加额外的竞价实例可以提高分布式服务的可用性。另外， $Extra(2, 0.2)$ 策略为两个增加的节点花费了31 $\sim$ 41美元的额外成本。Jupiter竞价框架在可用性和成本两个方面都要优于这两个启发式竞价策略。
 
 对于分布式存储服务，图 \ref{figure:dsscost} 展示了 Jupiter 竞价框架在不同竞价周期下所需要的成本。最好的情况还是竞价周期为6小时的配置，分布式存储服务在11周时间里所需成本为189.93美元。相比使用按需计算实例，计算成本削减了超过1000美元。在对照组策略 $Extra(0, 0.2)$ 中，所需成本平均为183.5美元。这要略微低于 Jupiter 竞价框架的成本，主要原因是在策略 $Extra(0, 0.2)$ 下竞价实例发生了非常多的竞价不足失效而使得所需支付的计算成本减小。
-
 \begin{figure}
   \centering
-  \includegraphics[width=1.0\textwidth]{cost-dss}
+  \includegraphics[width=0.9\textwidth]{cost-dss.pdf}
   \caption{不同竞价策略下基于纠删码的分布式存储服务的竞价实例租用成本（2014年10－12月）}
   \label{figure:dsscost}
 \end{figure}
+
+Jupiter竞价框架除竞价周期为9个小时的配置均保证了和基线相当的服务可用性级别。在竞价周期为9个小时的配置下，分布式存储服务的失效时间略长于可用性级别的要求。与之相比，启发式策略 $Extra(0, 0.2)$ 虽成本略低但服务的可用性级别完全处于不可接受的程度。而启发式策略 $Extra(2, 0.2)$ 虽然在可用性相比 $Extra(2, 0.2)$ 策略有所改善，接近 Jupiter 的竞价策略。但 $Extra(2, 0.2)$ 策略所需成本远远高于 Jupiter 的竞价策略。详细评测结果参见图 \ref{figure:dlscost} 和 \ref{figure:dssavailability}。
 \begin{figure}
   \centering
-  \includegraphics[width=1.0\textwidth]{ava-dss}
+  \includegraphics[width=0.9\textwidth]{ava-dss.pdf}
   \caption{不同竞价策略下基于纠删码的分布式存储服务的可用性（2014年10－12月）}
   \label{figure:dssavailability}
 \end{figure}
-
-Jupiter竞价框架除竞价周期为9个小时的配置均保证了和基线相当的服务可用性级别。在竞价周期为9个小时的配置下，分布式存储服务的失效时间略长于可用性级别的要求。与之相比，启发式策略 $Extra(0, 0.2)$ 虽成本略低但服务的可用性级别完全处于不可接受的程度。而启发式策略 $Extra(2, 0.2)$ 虽然在可用性相比 $Extra(2, 0.2)$ 策略有所改善，接近 Jupiter 的竞价策略。但 $Extra(2, 0.2)$ 策略所需成本远远高于 Jupiter 的竞价策略。详细评测结果参见图 \ref{figure:dlscost} 和 \ref{figure:dssavailability}。
 
 在图\ref{figure:dlscost} 和 \ref{figure:dsscost}中，本文提出的竞价框架所需成本随不同的竞价周期变动很大。一个短的竞价周期意味着更频繁的申请、启动新的竞价实例会消耗更多的启动时间，进而减少了有效的运行时间增加了计算成本。然而一个很长的竞价周期配置则失去了一些根据市场价格变化改变竞价的机会，因为出于保证服务可用性的考虑对于长竞价周期竞价框架给出的竞价会更高。6小时的竞价周期设置似乎是几个竞价周期中变现最好的。针对Jupiter竞价框架的一个扩展是检测竞价实例市场价格的波动频率并针对性地调整竞价周期。
 
