@@ -17,7 +17,7 @@
 
 \section{可接受集与分布式服务可用性}
 \label{sec:jupiter_dist_basis}
-SMR（状态机复制）是分布式服务实现高可用性的常见手段。SMR的容错方式是在初始状态相同的多个节点上复制执行相同的操作序列，客户端请求将被分散到多个服务器副本上。每一个操作都由副本状态机确认所有副本已达成一致。
+SMR（状态机复制）是分布式服务实现高可用性的常见手段。SMR 的容错方式是在初始状态相同的多个节点上复制执行相同的操作序列，客户端请求将被分散到多个服务器副本上。每一个操作都由副本状态机确认所有副本已达成一致。
 
 事实上，分布式系统一致性的达成通常基于 Quorum 投票机制 \cite{Gifford:1979:WVR:800215.806583}。这类机制采用基于投票的算法，一个请求必须获得足够多的节点投票 $v$ 才能够执行一个限制性操作。一个可行的 $v$ 的节点投票组合称为 Quorum。只要有足够的可用节点投票，分布式系统就是可用的。否则，由于可用节点没有足够的投票，整个系统由于无法执行一些关键的限制性操作被视为不可用。
 
@@ -58,7 +58,7 @@ A_{\mathcal{A}} = \sum_{S \in \mathcal{A}}(\prod_{i \in S} (1-p_i) \prod_{j \in 
 \label{jupiter-formulation}
 Paxos \cite{lamport2001paxos}协议已经被证明是一个高效的分布式系统一致性协议。一系列基于 Paxos 的协议被广泛用于实现副本状态机以构建各类高可用分布式服务 \cite{Bolosky:2011:PRS:1972457.1972472, Burrows:2006:CLS:1298455.1298487, Mu:2014:PME:2600212.2600218}。在分布式系统中配置基于 Paxos 的 SMR 可以容忍任意的少于一半数量的节点同时失效问题，似乎我们直接将分布式系统中部署于竞价型实例之上。事实上，这并不能保证分布式服务拥有同样的可用性。这里用一个简单的例子进行解释。
 
-假设一个基于 Paxos 的分布式系统有 5 个按需型实例节点。每个节点的失效概率是 0.01。这个分布式系统能容忍任意不多于两个节点的同时失效。根据公式\eqref{eq_a_as}，其上的分布式服务的可用性期望是0.9999901494，这意味着该服务在一个月时间中的停机故障时间只有约25.5秒。如果将所有5个节点替换为竞价型实例，且将竞价均设为和其市场价格相同，可用性级别将大打折扣。虽然替换后的分布式系统仍然能够和之前一样容忍任意不超过两个节点的同时失效，该分布式系统的非失效概率远远低于之前的配置。以 2014 年 6 月 Amazon EC2 云平台的来自不同可用区的 5 个 ``linux.m1.small'' 类型竞价型实例为例，可用区 US East 1a, US East 1c, US West 1b, US West 2a, US West 2b 在 2014 年 6 月 1 日凌晨零点的市场价格分别为：0.8 美分，0.8 美分，0.9 美分，0.9 美分，0.9 美分。如果我们在每个可用区以前述的价格各申请一个该配置类型的竞价型实例组成相同的分布式系统，节点失效将发生的较为频繁。在整个 2014 年 6 月，其上的分布式服务的故障停机时间将超过 1500 秒。
+假设一个基于 Paxos 的分布式系统有 5 个按需型实例节点。每个节点的失效概率是 0.01。这个分布式系统能容忍任意不多于两个节点的同时失效。根据公式\eqref{eq_a_as}，其上的分布式服务的可用性期望是0.9999901494，这意味着该服务在一个月时间中的停机故障时间只有约25.5秒。如果将所有5个节点替换为竞价型实例，且将竞价均设为和其市场价格相同，可用性级别将大打折扣。虽然替换后的分布式系统仍然能够和之前一样容忍任意不超过两个节点的同时失效，该分布式系统的非失效概率远远低于之前的配置。以 2014 年 6 月 Amazon EC2 云平台的来自不同可用区的 5 个 ``linux.m1.small'' 类型竞价型实例为例，可用区 ``us-east-1a'', ``us-east-1c'', ``us-west-1b'', ``us-west-2a'', ``us-west-2b'' 在 2014 年 6 月 1 日凌晨零点的市场价格分别为：0.8 美分，0.8 美分，0.9 美分，0.9 美分，0.9 美分。如果我们在每个可用区以前述的价格各申请一个该配置类型的竞价型实例组成相同的分布式系统，节点失效将发生的较为频繁。在整个 2014 年 6 月，其上的分布式服务的故障停机时间将超过 1500 秒。
 
 本质上，对于分布式系统来说，在使用竞价型实例时能够至多容忍的同时失效节点数不能获得同使用按需型实例同样的系统可用性。因为竞价型实例的失效概率远高于按需型实例。竞价型实例的失效概率随着竞价型实例市场价格的波动不断变化。因此，我们通过竞价和市场价来刻画竞价型实例的失效概率。
 
@@ -138,7 +138,7 @@ s.t.
 \begin{equation}\label{eq_bgp}
 \sum_{i=1}^n {\epsilon(b_i - p_i)} \geq m
 \end{equation}
-and
+
 \begin{equation}\label{eq_aae}
 A_{\mathcal{A}_{o}(S_o, {\bf{FP^{\prime}}})} - A_{\mathcal{A}_{o}(S_s, FP(\bf b))} < \varepsilon
 \end{equation}
@@ -173,23 +173,19 @@ w_i = log_2(\frac{1-p_i}{p_i})
 \begin{algorithm}
 \caption{在线竞价}
 \label{algo:bidding}
-\KwIn{$availability$ and instance $type$}
+\KwIn{服务可用性要求 $availability$, 最低节点数限制 $N$}
 \KwOut{$bids$}
-$zones\gets get\_availability\_zones()$\;
-\For{$(n = 1; n \not> zones.length; n++)$}
+$zones\gets get\_availability\_zones()$\tcp*[r]{获取所有可用区}
+\ForEach{$n \in [N, zones.size]$}
 {
-  $FP\gets node\_failure\_pr(n, availability)$\;
+  $FP\gets node\_failure\_pr(n, availability)$\tcp*[r]{节点失效概率上限}
   \ForEach{$zone \in zones$}
   {
-    $spotprice\gets get\_spot\_price(zone, type)$\;
-    $bid\gets spotprice.price$\;
-    \While{$bid \not> get\_on\_demand\_price(zone, type) $}
+    \ForEach{$bid \in [zone.spot\_prices[1], zone.on\_demand\_price)$}
     {
-      \eIf{$estimate\_FP(zone, bid, spotprice) \not >FP$}
+      \If{$estimate\_FP(zone, bid, zone.spot\_prices) \not> FP$}
       {
-        \textbf{break}\;
-      }{
-        $bid\gets bid + 1$\;
+        \textbf{break}\tcp*[r]{给定竞价下估计的失效概率可接受}
       }
     }
     $bids[n][zone]\gets bid$\;
