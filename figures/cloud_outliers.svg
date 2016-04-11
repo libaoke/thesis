@@ -38,7 +38,7 @@
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g12" /><g
+     inkscape:current-layer="g184" /><g
      id="g10"
      inkscape:groupmode="layer"
      inkscape:label="ink_ext_XXXXXX"
@@ -325,17 +325,17 @@
          transform="scale(10,10)"><text
            transform="matrix(0,1,1,0,0,0)"
            id="text186"
-           x="107.70699"
-           y="9.072382"><tspan
-             style="font-size:8.8px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:SimHei;-inkscape-font-specification:SimHei"
+           x="105.22537"
+           y="10.726793"><tspan
+             style="font-size:8px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:SimHei;-inkscape-font-specification:SimHei"
              sodipodi:role="line"
              id="tspan188"
-             y="9.072382"
-             x="107.70699 107.70699 116.70699 125.70699 134.70699 143.70699">用s时（秒）</tspan></text>
+             x="105.22537"
+             y="10.726793">用时（秒）</tspan></text>
 <text
            transform="matrix(1,0,0,-1,173.567,1.98438)"
            id="text190"><tspan
-             style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:SimHei;font-variant:normal;font-weight:normal;font-size:8.8px;writing-mode:lr;-inkscape-font-specification:SimHei"
+             style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:SimHei;font-variant:normal;font-weight:normal;font-size:8px;writing-mode:lr;-inkscape-font-specification:SimHei"
              x="0 9"
              y="0"
              sodipodi:role="line"
@@ -343,7 +343,7 @@
 <text
            transform="matrix(1,0,0,-1,191.567,1.98438)"
            id="text194"><tspan
-             style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:SimHei;font-variant:normal;font-weight:normal;font-size:8.8px;writing-mode:lr;-inkscape-font-specification:SimHei"
+             style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:SimHei;font-variant:normal;font-weight:normal;font-size:8px;writing-mode:lr;-inkscape-font-specification:SimHei"
              x="0 4.5"
              y="0"
              sodipodi:role="line"

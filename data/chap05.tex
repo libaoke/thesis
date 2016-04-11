@@ -161,7 +161,7 @@ $selected\gets min\_key(avg)$\;
 {
   $selected\gets excluded$\;
 }
-\Return{$selected$}
+\Return{$selected$}\;
 \end{algorithm}
 
 在这个可用区选择算法中，竞价型实例的市场价格标准差 $\sigma$ 和简单移动平均 $SMA$ 值均使用最近 $n$ 个小时的价格历史数据计算得来。$n$ 的值可以根据价格变化频率确定，默认值可设为一天时间（24小时）。可用区选择算法主要考虑备选可用区的价格稳定性和趋势。通过设定一个标准差的阀值 $T$ 可以过滤不稳定的可用区。如果算法返回的可用区同互备对中另一个节点可用区相同则表示应在该可用区购买按需型实例，否则以按需型实例价格作为竞价申请指定可用区的竞价型实例。本章主要工作和重点在于使用轻量级暖备机制提升服务可用性和性能，在可用区选择和竞价设定算法上倾向于简单有效。因此，这里不再引入竞价型实例市场价格的预测模型。在实际使用中，\emph{Gemini} 可以方便地替换虚拟机实例调度器的策略，改用其他竞价算法。
@@ -187,12 +187,12 @@ $regions\gets get\_regions()$\tcp*[r]{获取所有地理区域}
 \ForEach{$region \in regions$}
 {
   \tcp*[h]{使用可用区选择算法选出两个可用区}
-  $zoneA\gets region.selectAvZ(region.AvZ[1]$
-  $zoneB\gets region.selectAvZ(zoneA)$
+  $zoneA\gets region.selectAvZ(region.AvZ[1])$\;
+  $zoneB\gets region.selectAvZ(zoneA)$\;
   $prices[region]\gets zoneA.spot\_prices[1] + zoneB.spot\_prices[1]$\;
 }
 $selected = min\_key(prices)$\;
-\Return{$selected$}
+\Return{$selected$}\;
 \end{algorithm}
 
 \section{系统评测}

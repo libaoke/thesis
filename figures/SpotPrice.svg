@@ -50,7 +50,7 @@
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g40" /><g
+     inkscape:current-layer="g48" /><g
      id="g10"
      inkscape:groupmode="layer"
      inkscape:label="ink_ext_XXXXXX"
@@ -130,21 +130,23 @@
                  sodipodi:role="line"
                  id="tspan68">8:389:079:3610:0410:3311:02</tspan></text>
 <text
-               transform="matrix(0,1,1,0,25.5,93.525)"
-               id="text70"><tspan
-                 style="font-size:9.6px;font-variant:normal;font-weight:bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:SimHei;-inkscape-font-specification:SimHei Bold;font-style:normal"
+               transform="matrix(0,1,1,0,0,0)"
+               id="text70"
+               x="105.65736"
+               y="24.691177"><tspan
+                 style="font-size:8px;font-style:normal;font-variant:normal;font-weight:bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:SimHei;-inkscape-font-specification:SimHei Bold"
                  sodipodi:role="line"
                  id="tspan72"
-                 x="0"
-                 y="0">市场价格（美元）</tspan></text>
+                 x="105.65736"
+                 y="24.691177">市场价格（美元）</tspan></text>
 <text
                transform="scale(1,-1)"
                id="text74"
-               x="195.23787"
+               x="194.02463"
                y="-16.595987"><tspan
-                 style="font-size:9.6px;font-variant:normal;font-weight:bold;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:SimHei;-inkscape-font-specification:SimHei"
+                 style="font-size:8px;font-variant:normal;font-weight:bold;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:SimHei;-inkscape-font-specification:SimHei"
                  sodipodi:role="line"
                  id="tspan76"
-                 x="195.23787"
+                 x="194.02463"
                  y="-16.595987">时间（2014年6月24日）</tspan></text>
 </g></g></g></g></g></svg>

@@ -126,7 +126,7 @@ $outliers\gets []$\;
     $outliers\gets [clusters[2], outlierClustering(clusters[1])]$\;
   }
 }
-\Return{$outliers$}
+\Return{$outliers$}\;
 \end{algorithm}
 
 算法 \ref{fig-outlier-algo} 给出了一个基于 K-means 聚类分析的异常者聚类方法。由于 K-means 算法对初值的选取比较敏感，而这里聚类的目标是将异常者任务和正常任务分成两类。因此可以用所有点中两个特征值的最小值作为一类初始聚类中心，所有点中两个特征值的最大值作为另一类初始聚类中心。如前文所述，异常者检测的目标是报告可疑的异常者。为了减少漏报，可以接受一定程度的误报。因此，在第一次 K-means 聚类后，可以对被认为不是异常者的一类再进行一次同样的 $k = 2$ 的 K-means 聚类分析，以过滤掉图 \ref{figure:clusteringexample} 中的类似 $D$ 点的情形。这样可以保证很大程度上的不漏报。
@@ -151,7 +151,7 @@ $outliers\gets []$\;
 $shards\gets 2$\tcp*[r]{可拆分任务的分片数}
 \While{$job.state\not=FinishedOrFaulty$}
 {
-  \If{$job.finished\_tasks\not=nil$}
+  \If{$job.finished\_tasks\not=\textbf{nil}$}
   {
     $shards\gets job.finsished\_tasks.size + 1$\;
   }
