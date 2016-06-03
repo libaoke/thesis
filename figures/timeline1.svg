@@ -91,12 +91,12 @@
              id="tspan3079"
              x="69.155701"
              y="-166.537"
-             style="font-size:9.6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:SimHei;-inkscape-font-specification:SimHei">运行在</tspan><tspan
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:SimHei;-inkscape-font-specification:SimHei">运行在</tspan><tspan
              sodipodi:role="line"
              x="69.155701"
-             y="-155.537"
-             style="font-size:9.6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:SimHei;-inkscape-font-specification:SimHei"
-             id="tspan3081">竞价型实例</tspan></text>
+             y="-154.537"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:SimHei;-inkscape-font-specification:SimHei"
+             id="tspan3081">竞价云实例</tspan></text>
 <text
            xml:space="preserve"
            style="font-size:32px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -109,12 +109,12 @@
              id="tspan3085"
              x="146.65356"
              y="-103.27927"
-             style="font-size:9.6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:SimHei;-inkscape-font-specification:SimHei">请求</tspan><tspan
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:SimHei;-inkscape-font-specification:SimHei">请求</tspan><tspan
              sodipodi:role="line"
              x="146.65356"
-             y="-92.279266"
-             style="font-size:9.6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:SimHei;-inkscape-font-specification:SimHei"
-             id="tspan3087">按需型实例</tspan></text>
+             y="-91.279266"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:SimHei;-inkscape-font-specification:SimHei"
+             id="tspan3087">按需云实例</tspan></text>
 <text
            xml:space="preserve"
            style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -127,7 +127,7 @@
              id="tspan3091"
              x="306.09195"
              y="-202.81267"
-             style="font-size:9.6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:SimHei;-inkscape-font-specification:SimHei">按需型实例可用</tspan></text>
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:SimHei;-inkscape-font-specification:SimHei">按需云实例可用</tspan></text>
 <text
            xml:space="preserve"
            style="font-size:32px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -140,12 +140,12 @@
              id="tspan3079-1"
              x="495.39639"
              y="-166.22751"
-             style="font-size:9.6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:SimHei;-inkscape-font-specification:SimHei">运行在</tspan><tspan
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:SimHei;-inkscape-font-specification:SimHei">运行在</tspan><tspan
              sodipodi:role="line"
              x="495.39639"
-             y="-155.22751"
-             style="font-size:9.6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:SimHei;-inkscape-font-specification:SimHei"
-             id="tspan3081-9">按需型实例</tspan></text>
+             y="-154.22751"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:SimHei;-inkscape-font-specification:SimHei"
+             id="tspan3081-9">按需云实例</tspan></text>
 <text
            xml:space="preserve"
            style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -221,7 +221,7 @@
              id="tspan3133"
              x="294.85428"
              y="-16.053768"
-             style="font-size:9.6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:SimHei;-inkscape-font-specification:SimHei">回收竞价型实例</tspan></text>
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:SimHei;-inkscape-font-specification:SimHei">回收竞价云实例</tspan></text>
 </g><path
          d="m 4469.41,1800.89 0,-1090.152"
          style="fill:none;stroke:#000000;stroke-opacity:1;stroke-width:12.6645;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:151.974,151.974;stroke-dashoffset:0"

@@ -136,11 +136,11 @@
            x="167.45546"
            y="-328.94299"
            style="font-size:19.90823746px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:SimHei;-inkscape-font-specification:SimHei"><tspan
-             style="font-size:19.90823654px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:SimHei;-inkscape-font-specification:SimHei"
+             style="font-size:19.90823746px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:SimHei;-inkscape-font-specification:SimHei"
              sodipodi:role="line"
              id="tspan50"
              x="167.45546"
-             y="-328.94299">竞价型实例+EBS</tspan></text>
+             y="-328.94299">竞价云实例+EBS</tspan></text>
 </g><g
          id="g52"
          transform="matrix(0.44527094,0,0,0.43880888,1592.95,1393.5808)"><g
@@ -157,13 +157,13 @@
              transform="scale(10,10)"><text
                transform="scale(1,-1)"
                id="text66"
-               x="392.10132"
+               x="381.32135"
                y="-193.05882"><tspan
-                 style="font-size:19.90823654px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:SimHei;-inkscape-font-specification:SimHei"
+                 style="font-size:19.90823746px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:SimHei;-inkscape-font-specification:SimHei"
                  sodipodi:role="line"
                  id="tspan68"
-                 x="392.10132"
-                 y="-193.05882">按需实例</tspan></text>
+                 x="381.32135"
+                 y="-193.05882">按需云实例</tspan></text>
 </g></g></g><g
          id="g70"
          transform="matrix(0.44527094,0,0,0.43880888,1592.95,1393.5808)"><g
@@ -186,12 +186,12 @@
                id="text92"
                x="168.12367"
                y="-45.743"
-               style="text-anchor:middle;text-align:center"><tspan
-                 style="font-size:19.90823654px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:SimHei;-inkscape-font-specification:SimHei;text-anchor:middle;text-align:center"
+               style="text-align:center;text-anchor:middle"><tspan
+                 style="font-size:19.90823746px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:SimHei;-inkscape-font-specification:SimHei"
                  sodipodi:role="line"
-                 x="74.337204"
+                 x="168.12367"
                  y="-45.743"
-                 id="tspan3151">竞价型实例+实例存储</tspan></text>
+                 id="tspan3151">竞价云实例+实例存储</tspan></text>
 <text
                transform="scale(1,-1)"
                id="text98"
